@@ -1,6 +1,26 @@
 radio.setGroup(123)
 radio.setFrequencyBand(48)
 radio.setTransmitSerialNumber(true)
+//Sensory
+type data = {
+    centro: number;
+    levo: number;
+    pravo: number;
+}
+type IRC = {
+    centro: DigitalPin;
+    levo: DigitalPin;
+    pravo: DigitalPin;
+}
+const IR: IRC = {
+    centro: DigitalPin.P15,
+    levo: DigitalPin.P14,
+    pravo: DigitalPin.P13
+}
+//Ostatní Bs
+radio.setGroup(123)
+radio.setFrequencyBand(48)
+radio.setTransmitSerialNumber(true)
 let x = 0
 let y = 0
 let a = 0
@@ -17,6 +37,15 @@ let kousek3 = 0
 let oves = 0
 let uhel = 0
 let uzel = 0
+//Sensory
+let dataPackage: data;
+const datas: data = {
+    centro: pins.digitalReadPin(IR.centro),
+    levo: pins.digitalReadPin(IR.pravo),
+    pravo: pins.digitalReadPin(IR.levo)
+}
+//Bs
+
 basic.forever(function () {
     radio.onReceivedString(function (ReceivedString) {
         let dilek = ReceivedString.split(',')
